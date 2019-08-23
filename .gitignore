@@ -1,3 +1,6 @@
+.idea/
+plugins/
+
 # Logs
 logs
 *.log

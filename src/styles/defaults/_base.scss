@@ -1,0 +1,17 @@
+// ==================================================
+// Base styles
+// ==================================================
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  color: white;
+  background-color: black;
+}
+
+body {
+  background: var(--body-bg);
+}

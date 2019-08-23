@@ -1,0 +1,53 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "globals": {
+    "graphql": true,
+    "FB": true
+  },
+  "settings": {
+    "import/resolver": {
+        "alias": [
+          ["~static", "./static"]
+        ],
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "import/prefer-default-export": 0,
+    "no-console": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "react/forbid-prop-types": 0,
+    "react/no-danger": 0,
+    "react/jsx-one-expression-per-line": [
+      3,
+      {
+        "allow": "literal"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 250
+      }
+    ]
+  }
+}

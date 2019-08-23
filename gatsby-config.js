@@ -1,34 +1,150 @@
+const globImporter = require('node-sass-glob-importer');
+
+require('dotenv').config({
+  // reference: https://www.gatsbyjs.org/docs/environment-variables/
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+console.log(`.env.${process.env.NODE_ENV}`);
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: 'silverstripe-gatsby-theme', // TODO
+    description: 'A Gatsby Theme for SilverStripe', // TODO
+    author: 'Stevie Mayhew', // TODO
+    siteUrl: process.env.GATSBY_SITE_URL,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: 'silverstripe-gatsby-theme',
+        short_name: 'silverstripe-gatsby-theme',
+        start_url: '/',
+        background_color: '#fff',
+        theme_color: '#000',
+        // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+        // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+        display: 'standalone',
+        icon: 'static/images/favicon.png', // This path is relative to the root of the site.
+        icons: [
+          {
+            src: '/favicons/favicon-48x48.png',
+            sizes: '48x48',
+            type: 'image/png',
+          },
+          {
+            src: '/favicons/favicon-144x144.png',
+            sizes: '144x144',
+            type: 'image/png',
+          },
+          {
+            src: '/favicons/favicon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+        include_favicon: true, // Include favicon
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        siteUrl: process.env.GATSBY_SITE_URL,
       },
     },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: process.env.GATSBY_SITE_URL,
+        resolveEnv: () => process.env.NODE_ENV,
+        env: {
+          development: {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+          },
+          production: {
+            policy: [{ userAgent: '*', allow: '/' }],
+          },
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: `${__dirname}/static/images`,
+      },
+    },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-react-svg',
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        importer: globImporter(),
+      },
+    },
+    'gatsby-plugin-eslint',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: process.env.GATSBY_GOOGLE_TAGMANAGER_ID,
+
+        // Include GTM in development.
+        // Defaults to false meaning GTM will only be loaded in production.
+        includeInDevelopment: false,
+
+        // Specify optional GTM environment details.
+        // gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIROMENT_AUTH_STRING',
+        // gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIROMENT_PREVIEW_NAME',
+        // dataLayerName: 'YOUR_DATA_LAYER_NAME',
+      },
+    },
+    // {
+    //   resolve: 'gatsby-source-graphql',
+    //   options: {
+    //     // This type will contain remote schema Query type
+    //     typeName: 'SS',
+    //     // This is field under which it's accessible
+    //     fieldName: 'ss',
+    //     // Url to query from
+    //     url: process.env.GATSBY_API_URL,
+    //     headers: {
+    //       Origin: `${process.env.GATSBY_SITE_URL}`,
+    //     },
+    //   },
+    // },
+    {
+      resolve: 'gatsby-source-silverstripe',
+      options: {
+        // // This type will contain remote schema Query type
+        // typeName: 'SS',
+        // // This is field under which it's accessible
+        // fieldName: 'ss',
+        // // Url to query from
+        // url: process.env.GATSBY_API_URL,
+        headers: {
+          Origin: `${process.env.GATSBY_SITE_URL}`,
+        },
+        spaceId: 1234,
+        // Learn about environment variables: https://gatsby.dev/env-vars
+        accessToken: process.env.SILVERSTRIPE_ACCESS_TOKEN,
+        apiURL: 'http://ss.bambusa.localhost/graphql',
+        host: 'localhost:8000',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        monotype: {
+          projectId: 'edeb819d-9c20-4f5a-98e4-7bd532ebc0ba',
+          loadAllFonts: true,
+        },
+      },
+    },
   ],
-}
+};

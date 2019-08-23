@@ -1,0 +1,73 @@
+// ==================================================
+// Image
+// ==================================================
+
+.c-heading {
+  padding-bottom: 60px;
+  font-family: var(--font-family-nexa);
+  font-weight: 300;
+  transform: rotate(-3deg);
+  max-width: 100vw;
+
+  span {
+    display: inline-block;
+    padding: 10px 15px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 0.93;
+    letter-spacing: 0.8px;
+    font-stretch: normal;
+    color: var(--colour-white);
+    text-transform: uppercase;
+    background-color: var(--colour-blue);
+  }
+
+  &.h1 {
+    font-size: 51.1px;
+
+    span {
+      margin-right: 12px;
+      margin-bottom: 12px;
+    }
+
+    @media screen and (max-width: 940px) {
+      font-size: 26px;
+
+      span {
+        padding: 8px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  &.h2 {
+    font-size: 30.9px;
+
+    span {
+      padding: 8px 10px;
+      margin-bottom: 6px;
+    }
+
+    @media screen and (max-width: 940px) {
+      font-size: 20.4px;
+      letter-spacing: 0.3px;
+
+      span {
+        padding: 8px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  &.h3 {
+    font-size: 21.6px;
+
+    span {
+      padding: 8px 10px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+  }
+}
