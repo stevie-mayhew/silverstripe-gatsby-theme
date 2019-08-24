@@ -7,21 +7,17 @@ import { SEO } from 'components';
 import PropTypes from 'prop-types';
 
 const IndexPage = ({ data }) => {
-  console.log(data);
   return (
     <Layout>
-      <SEO title={data.site.siteMetadata.title} />
-      <h1>{data.site.siteMetadata.title}</h1>
-      {data.content}
+      <SEO title={data.silverStripePage.MenuTitle} />
+      <h1>{data.silverStripePage.Title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: data.silverStripePage.Content }} />
     </Layout>
   );
 };
 
 IndexPage.defaultProps = {
-  data: {
-    title: '',
-    content: '',
-  },
+  data: {},
 };
 
 IndexPage.propTypes = {
@@ -29,11 +25,11 @@ IndexPage.propTypes = {
 };
 
 export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
+  query($ID: Int!) {
+    silverStripePage(ID: { eq: $ID }) {
+      Title
+      Content
+      MenuTitle
     }
   }
 `;

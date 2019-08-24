@@ -5,8 +5,6 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-console.log(`.env.${process.env.NODE_ENV}`);
-
 module.exports = {
   siteMetadata: {
     title: 'silverstripe-gatsby-theme', // TODO
@@ -47,7 +45,9 @@ module.exports = {
         include_favicon: true, // Include favicon
       },
     },
-    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-react-helmet',
+    },
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
@@ -76,19 +76,30 @@ module.exports = {
         path: `${__dirname}/static/images`,
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    'gatsby-plugin-react-svg',
+    {
+      resolve: 'gatsby-transformer-sharp',
+    },
+    {
+      resolve: 'gatsby-plugin-sharp',
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+    },
     {
       resolve: 'gatsby-plugin-sass',
       options: {
         importer: globImporter(),
       },
     },
-    'gatsby-plugin-eslint',
+    {
+      resolve: 'gatsby-plugin-eslint',
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    'gatsby-plugin-offline',
+
+    {
+      resolve: 'gatsby-plugin-offline',
+    },
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
@@ -104,29 +115,9 @@ module.exports = {
         // dataLayerName: 'YOUR_DATA_LAYER_NAME',
       },
     },
-    // {
-    //   resolve: 'gatsby-source-graphql',
-    //   options: {
-    //     // This type will contain remote schema Query type
-    //     typeName: 'SS',
-    //     // This is field under which it's accessible
-    //     fieldName: 'ss',
-    //     // Url to query from
-    //     url: process.env.GATSBY_API_URL,
-    //     headers: {
-    //       Origin: `${process.env.GATSBY_SITE_URL}`,
-    //     },
-    //   },
-    // },
     {
       resolve: 'gatsby-source-silverstripe',
       options: {
-        // // This type will contain remote schema Query type
-        // typeName: 'SS',
-        // // This is field under which it's accessible
-        // fieldName: 'ss',
-        // // Url to query from
-        // url: process.env.GATSBY_API_URL,
         headers: {
           Origin: `${process.env.GATSBY_SITE_URL}`,
         },
