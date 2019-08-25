@@ -118,14 +118,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-silverstripe',
       options: {
-        headers: {
-          Origin: `${process.env.GATSBY_SITE_URL}`,
-        },
-        spaceId: 1234,
-        // Learn about environment variables: https://gatsby.dev/env-vars
-        accessToken: process.env.SILVERSTRIPE_ACCESS_TOKEN,
-        apiURL: 'http://ss.bambusa.localhost/graphql',
-        host: 'localhost:8000',
+        host: 'http://gatsby-cms.local',
       },
     },
     {

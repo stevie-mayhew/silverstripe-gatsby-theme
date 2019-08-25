@@ -24,13 +24,13 @@ IndexPage.propTypes = {
   data: PropTypes.any,
 };
 
-export const query = graphql`
-  query($ID: Int!) {
-    silverStripePage(ID: { eq: $ID }) {
-      Title
-      Content
-      MenuTitle
-    }
-  }
-`;
+// export const query = graphql`
+//   query($ID: Int!) {
+//     silverStripePage(ID: { eq: $ID }) {
+//       Title
+//       Content
+//       MenuTitle
+//     }
+//   }
+// `;
 export default IndexPage;

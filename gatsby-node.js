@@ -36,6 +36,7 @@ exports.onCreateWebpackConfig = ({
 };
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
+  return;
   const pageTemplate = path.resolve('src/templates/index.js');
   // Query for markdown nodes to use in creating pages.
   // You can query for whatever data you want to create pages for e.g.
