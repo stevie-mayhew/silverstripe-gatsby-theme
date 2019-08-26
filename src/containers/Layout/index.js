@@ -9,10 +9,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
+import { Header, Footer } from 'components';
+import { Layout } from 'antd';
 
-// import { Footer } from 'layouts';
+const { Content } = Layout;
 
-const Layout = ({ children }) => (
+const MainLayout = ({ children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -34,21 +36,21 @@ const Layout = ({ children }) => (
                   window.location = 'https://www.google.com/chrome/';
                 }
               }
-              `}
+            `}
           </script>
         </Helmet>
-        <main>
-          <div className="l-header-border" />
+        <Header links={['test']} />
+        <Content style={{ padding: '0 50px' }}>
           {children}
-          <div className="l-footer-border" />
-        </main>
+        </Content>
+        <Footer />
       </>
     )}
   />
 );
 
-Layout.propTypes = {
+MainLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Layout;
+export default MainLayout;

@@ -118,8 +118,11 @@ module.exports = {
     {
       resolve: 'gatsby-source-silverstripe',
       options: {
-        host: 'http://gatsby-cms.local',
+        host: `${process.env.GATSBY_API_URL}`,
       },
+    },
+    {
+      resolve: 'gatsby-plugin-antd',
     },
     {
       resolve: 'gatsby-plugin-web-font-loader',

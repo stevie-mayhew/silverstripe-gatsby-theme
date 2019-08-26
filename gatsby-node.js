@@ -36,61 +36,77 @@ exports.onCreateWebpackConfig = ({
 };
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  return;
-  const pageTemplate = path.resolve('src/templates/index.js');
+  const staffPageTemplate = path.resolve('src/templates/staff.js');
+  const homePageTemplate = path.resolve('src/templates/home.js');
+  const pageTemplate = path.resolve('src/templates/page.js');
   // Query for markdown nodes to use in creating pages.
   // You can query for whatever data you want to create pages for e.g.
   // products, portfolio items, landing pages, etc.
   // Variables can be added as the second function parameter
   return graphql(`
 query {
+  allSilverStripeStaffPage {
+    edges {
+      node {
+        uuid
+        link
+      }
+    }
+  }
+  allSilverStripeHomePage {
+    edges {
+      node {
+        uuid
+        link
+      }
+    }
+  }
   allSilverStripePage {
     edges {
       node {
-        ID
-        Title
-        MenuTitle
-        Content
-        URLSegment
+        uuid
+        link
       }
     }
   }
 }
   `, { limit: 1000 })
-    .then(result => {
+    .then((result) => {
       if (result.errors) {
         throw result.errors;
       }
       // Create pages.
+      result.data.allSilverStripeStaffPage.edges.forEach(edge => {
+        createPage({
+          // Path for this page — required
+          path: `${edge.node.link}`,
+          component: staffPageTemplate,
+          context: {
+            uuid: edge.node.uuid,
+          },
+        });
+      });
+      // Create pages.
+      result.data.allSilverStripeHomePage.edges.forEach(edge => {
+        createPage({
+          // home page is always at the root
+          path: '/',
+          component: homePageTemplate,
+          context: {
+            uuid: edge.node.uuid,
+          },
+        });
+      });
+      // Create pages.
       result.data.allSilverStripePage.edges.forEach(edge => {
         createPage({
           // Path for this page — required
-          path: `${edge.node.URLSegment}`,
+          path: `${edge.node.link}`,
           component: pageTemplate,
           context: {
-            ID: edge.node.ID,
+            uuid: edge.node.uuid,
           },
         });
       });
     });
-};
-
-// Set root to /home instead of top level index.jsx
-exports.onCreatePage = ({ page, actions }) => {
-  const { deletePage, createPage } = actions;
-
-  return new Promise((resolve) => {
-    // if the page component is the index page component
-    if (page.componentPath === `${__dirname}/src/pages/home/index.jsx`) {
-      deletePage(page);
-
-      // create a new page but with '/' as path
-      createPage({
-        ...page,
-        path: '/',
-      });
-    }
-
-    resolve();
-  });
 };
