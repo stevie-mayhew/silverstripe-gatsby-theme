@@ -1,28 +1,30 @@
 import React from 'react';
 import { Menu, Layout } from 'antd';
 import { Link } from 'gatsby';
+import { buildMenu } from 'silverstripe-gatsby-helpers';
+
 
 const { Header: LayoutHeader } = Layout;
 
-const Header = () => (
-  <LayoutHeader>
-    <Menu mode="horizontal" style={{ lineHeight: '64px' }} theme="dark">
-      <Menu.Item key="">
-        <Link to="1">1</Link>
-      </Menu.Item>
-      <Menu.Item key="">
-        <Link to="2">2</Link>
-      </Menu.Item>
-      <Menu.Item key="">
-        <Link to="3">3</Link>
-      </Menu.Item>
-      <Menu.Item key="">
-        <Link to="4">4</Link>
-      </Menu.Item>
-    </Menu>
-  </LayoutHeader>
-);
+const Header = () => {
+  const menuItems = buildMenu(1);
 
+  return (
+    <LayoutHeader>
+      <Menu mode="horizontal" style={{ lineHeight: '64px' }} theme="dark">
+        {menuItems.map(item => (
+          <Menu.Item key={item.id}>
+            <Link to={item.link}>{item.SilverStripeSiteTree.menuTitle}</Link>
+          </Menu.Item>
+        ))}
+      </Menu>
+    </LayoutHeader>
+  );
+};
+
+
+Header.defaultProps = {
+};
 
 Header.propTypes = {
 };

@@ -118,7 +118,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-silverstripe',
       options: {
-        host: `${process.env.GATSBY_API_URL}`,
+        host: `${process.env.SILVERSTRIPE_URL}`,
       },
     },
     {

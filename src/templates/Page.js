@@ -8,12 +8,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { Header, Footer } from 'components';
+import {
+  Header,
+  Footer,
+  SideMenu,
+  Breadcrumbs,
+} from 'components';
 import { Layout } from 'antd';
+import { useCurrentPage } from 'silverstripe-gatsby-helpers';
 
 const { Content } = Layout;
 
-const MainLayout = ({ children }) => (
+const BasePage = ({ children }) => (
   <React.Fragment>
     <Helmet>
       <script>
@@ -27,16 +33,31 @@ const MainLayout = ({ children }) => (
         `}
       </script>
     </Helmet>
-    <Header />
-    <Content style={{ padding: '0 50px' }}>
-      {children}
-    </Content>
+    <Layout>
+      <Header />
+      <Layout>
+        <SideMenu page={useCurrentPage()} />
+        <Layout style={{ padding: '0 24px 24px' }}>
+          <Breadcrumbs page={useCurrentPage()} />
+          <Content
+            style={{
+              background: '#fff',
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+            }}
+          >
+            {children}
+          </Content>
+        </Layout>
+      </Layout>
+    </Layout>
     <Footer />
   </React.Fragment>
 );
 
-MainLayout.propTypes = {
+BasePage.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default MainLayout;
+export default BasePage;
