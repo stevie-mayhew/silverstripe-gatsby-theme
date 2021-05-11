@@ -43,7 +43,7 @@
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "node-sass-glob-importer": "^5.3.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
