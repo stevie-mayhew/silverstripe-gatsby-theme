@@ -24,7 +24,7 @@
     "deep-map": "^2.0.0",
     "dotenv": "^7.0.0",
     "es6-weak-map": "^2.0.3",
-    "gatsby": "^2.3.4",
+    "gatsby": "^2.32.13",
     "gatsby-image": "^2.0.36",
     "gatsby-plugin-antd": "^2.0.2",
     "gatsby-plugin-canonical-urls": "^2.0.12",
